@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2026-03-06T11:24:35.363683" rpa="false" schemaversion="5">
+<suite id="s1" name="Api" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api">
+<suite id="s1-s1" name="Cotacao Api Tests" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api\cotacao_api_tests.robot">
+<kw name="Criar Sessao API" owner="shipping_keywords" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:35.528240" level="INFO">Creating Session using : alias=malha, url=https://api-hml-malha.suryadental.com.br, headers={'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>malha</arg>
+<arg>${BASE_URL}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-06T11:24:35.527974" elapsed="0.000494"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:35.527415" elapsed="0.001180"/>
+</kw>
+<test id="s1-s1-t1" name="Cotacao De Frete Com Sucesso" line="9">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:35.529896" level="INFO">${qtd_num} = 1.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:35.529682" elapsed="0.000246"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:35.530196" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:35.530031" elapsed="0.000189"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:35.530680" level="INFO">${produto} = {'sku': '100306000', 'quantity': 1.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:35.530325" elapsed="0.000382"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:35.530765" elapsed="0.000060"/>
+</return>
+<msg time="2026-03-06T11:24:35.530953" level="INFO">${produto} = {'sku': '100306000', 'quantity': 1.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>${SKU}</arg>
+<arg>1</arg>
+<arg>${PRICE}</arg>
+<status status="PASS" start="2026-03-06T11:24:35.529319" elapsed="0.001659"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-06T11:24:35.531480" level="INFO">@{produtos} = [ {'sku': '100306000', 'quantity': 1.0, 'price': 11.86} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-06T11:24:35.531317" elapsed="0.000186"/>
+</kw>
+<kw name="Montar Body Cotacao" owner="shipping_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:35.532244" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 1.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>deliveryZipCode=${zipcode}</arg>
+<arg>products=${produtos}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:35.532032" elapsed="0.000230"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2026-03-06T11:24:35.532300" elapsed="0.000028"/>
+</return>
+<msg time="2026-03-06T11:24:35.532404" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 1.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>${ZIPCODE}</arg>
+<arg>@{produtos}</arg>
+<status status="PASS" start="2026-03-06T11:24:35.531822" elapsed="0.000600"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Body enviado: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-06T11:24:35.532664" elapsed="0.000209"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:36.206585" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '158'} 
+ body=b'{"deliveryZipCode": "85340000", "products": [{"sku": "100306000", "quantity": 1.0, "price": 11.86}], "suryaClubCode": "20", "salesPersonProtheusId": "A00018"}' 
+ </msg>
+<msg time="2026-03-06T11:24:36.206682" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:35 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '754', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"data":{"distributionCenterDocument":"00814559000155","dispatchTime":5,"EXPRESS":{"carrier":{"name":"São Gabriel Transportes Eireli-ME","description":"São Gabriel Translog 2024","document":"15.488.297/0012-06","id":"261"},"value":12.58,"days":2},"OTHERS":[{"carrier":{"name":"Expresso São Miguel ","description":"EXPRESSO SAO MIGUEL 2026","document":"00.428.307/0008-64","id":"296"},"value":45.84,"days":5},{"carrier":{"name":"Azul Linhas Aereas ","description":"Azul 09/09/2025","document":"09.296.295/0004-02","id":"288"},"value":66.9,"days":4}],"products":{"availableProducts":[{"sku":"100306000","name":"ESCOVA MACIA MULTI PROTECAO SENSODYNE","requestedQuantity":1,"availableStock":6324,"hasStock":true,"price":11.86}],"unavailableProducts":[]}}} 
+ </msg>
+<msg time="2026-03-06T11:24:36.206743" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:36.207107" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:35.533056" elapsed="0.674090"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status: ${response.status_code} | Resposta: ${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.207455" elapsed="0.000919"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.209072" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.208739" elapsed="0.000378"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:35.528688" elapsed="0.680752"/>
+</test>
+<test id="s1-s1-t2" name="Cotacao Sem Estoque" line="18">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.211439" level="INFO">${qtd_num} = 999999.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.211292" elapsed="0.000168"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.211901" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.211760" elapsed="0.000159"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.212176" level="INFO">${produto} = {'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.211990" elapsed="0.000203"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:36.212229" elapsed="0.000029"/>
+</return>
+<msg time="2026-03-06T11:24:36.212338" level="INFO">${produto} = {'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>${SKU_SEM_ESTOQUE}</arg>
+<arg>${QTD_SEM_ESTOQUE}</arg>
+<arg>${PRICE_SEM_ESTOQUE}</arg>
+<status status="PASS" start="2026-03-06T11:24:36.210997" elapsed="0.001356"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.212819" level="INFO">@{produtos} = [ {'sku': '100306000', 'quantity': 999999.0, 'price': 11.86} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.212684" elapsed="0.000154"/>
+</kw>
+<kw name="Montar Body Cotacao" owner="shipping_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.213664" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>deliveryZipCode=${zipcode}</arg>
+<arg>products=${produtos}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.213431" elapsed="0.000262"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2026-03-06T11:24:36.213732" elapsed="0.000021"/>
+</return>
+<msg time="2026-03-06T11:24:36.213827" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>${ZIPCODE}</arg>
+<arg>@{produtos}</arg>
+<status status="PASS" start="2026-03-06T11:24:36.213202" elapsed="0.000641"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:36.461034" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '163'} 
+ body=b'{"deliveryZipCode": "85340000", "products": [{"sku": "100306000", "quantity": 999999.0, "price": 11.86}], "suryaClubCode": "20", "salesPersonProtheusId": "A00018"}' 
+ </msg>
+<msg time="2026-03-06T11:24:36.461102" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '661', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"data":{"distributionCenterDocument":"00814559000155","dispatchTime":5,"STANDARD":{"carrier":{"name":"Expresso São Miguel ","description":"EXPRESSO SAO MIGUEL 2026","document":"00.428.307/0008-64","id":"296"},"value":0,"days":5},"EXPRESS":{"carrier":{"name":"São Gabriel Transportes Eireli-ME","description":"São Gabriel Translog 2024","document":"15.488.297/0012-06","id":"261"},"value":188.39,"days":2},"OTHERS":[],"products":{"availableProducts":[],"unavailableProducts":[{"sku":"100306000","name":"ESCOVA MACIA MULTI PROTECAO SENSODYNE","requestedQuantity":999999,"availableStock":6324,"hasStock":false,"price":11.86}]},"warning":"NO_SUFFICIENT_STOCK"}} 
+ </msg>
+<msg time="2026-03-06T11:24:36.461161" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:36.461557" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.214121" elapsed="0.247464"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.462601" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.461934" elapsed="0.000749"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:36.210382" elapsed="0.252621"/>
+</test>
+<test id="s1-s1-t3" name="Cotacao CEP Invalido" line="25">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.465151" level="INFO">${qtd_num} = 10.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.464922" elapsed="0.000269"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.465498" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.465321" elapsed="0.000199"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.465914" level="INFO">${produto} = {'sku': '100306000', 'quantity': 10.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.465617" elapsed="0.000341"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:36.466018" elapsed="0.000038"/>
+</return>
+<msg time="2026-03-06T11:24:36.466174" level="INFO">${produto} = {'sku': '100306000', 'quantity': 10.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>${SKU}</arg>
+<arg>10</arg>
+<arg>${PRICE}</arg>
+<status status="PASS" start="2026-03-06T11:24:36.464481" elapsed="0.001720"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.466662" level="INFO">@{produtos} = [ {'sku': '100306000', 'quantity': 10.0, 'price': 11.86} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.466495" elapsed="0.000187"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.467143" level="INFO">${body} = {'deliveryZipCode': '00000000', 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>deliveryZipCode=00000000</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.466928" elapsed="0.000236"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>products=${produtos}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.467628" elapsed="0.000203"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:36.701289" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '159'} 
+ body=b'{"deliveryZipCode": "00000000", "suryaClubCode": "20", "salesPersonProtheusId": "A00018", "products": [{"sku": "100306000", "quantity": 10.0, "price": 11.86}]}' 
+ </msg>
+<msg time="2026-03-06T11:24:36.701366" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=502, reason=Bad Gateway 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '37', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"code":"INVALID_DATAFRETE_RESPONSE"} 
+ </msg>
+<msg time="2026-03-06T11:24:36.701421" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:36.701757" level="INFO">${response} = &lt;Response [502]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.468079" elapsed="0.233731"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.702714" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>502</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.702127" elapsed="0.000647"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:36.463839" elapsed="0.239187"/>
+</test>
+<test id="s1-s1-t4" name="Cotacao Sem Produtos" line="36">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.704927" level="INFO">${body} = {'deliveryZipCode': '85340000', 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018', 'products': ''}</msg>
+<var>${body}</var>
+<arg>deliveryZipCode=${ZIPCODE}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<arg>products=${EMPTY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.704006" elapsed="0.000968"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:36.860411" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '105'} 
+ body=b'{"deliveryZipCode": "85340000", "suryaClubCode": "20", "salesPersonProtheusId": "A00018", "products": ""}' 
+ </msg>
+<msg time="2026-03-06T11:24:36.860493" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=422, reason=Unprocessable Entity 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '177', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"code":"VALIDATION","errors":[{"code":"invalid_type","expected":"array","received":"string","path":["products"],"message":"Expected array, received string"}],"location":"body"} 
+ </msg>
+<msg time="2026-03-06T11:24:36.860546" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:36.860915" level="INFO">${response} = &lt;Response [422]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.705290" elapsed="0.155679"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.861904" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>422</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.861263" elapsed="0.000724"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:36.703519" elapsed="0.159574"/>
+</test>
+<status status="PASS" start="2026-03-06T11:24:35.395184" elapsed="1.470243"/>
+</suite>
+<suite id="s1-s2" name="Test Shipping Quote" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_shipping_quote.robot">
+<kw name="Criar Sessao API" owner="shipping_keywords" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:36.878160" level="INFO">Creating Session using : alias=malha, url=https://api-hml-malha.suryadental.com.br, headers={'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>malha</arg>
+<arg>${BASE_URL}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-06T11:24:36.877787" elapsed="0.000625"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:36.877463" elapsed="0.001060"/>
+</kw>
+<test id="s1-s2-t1" name="Cotacao Multiplos Produtos" line="10">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.880248" level="INFO">${qtd_num} = 5.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.879981" elapsed="0.000312"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.880699" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.880455" elapsed="0.000280"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.881215" level="INFO">${produto} = {'sku': '100306000', 'quantity': 5.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.880884" elapsed="0.000363"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:36.881433" elapsed="0.000064"/>
+</return>
+<msg time="2026-03-06T11:24:36.881675" level="INFO">${produto1} = {'sku': '100306000', 'quantity': 5.0, 'price': 11.86}</msg>
+<var>${produto1}</var>
+<arg>${SKU}</arg>
+<arg>5</arg>
+<arg>${PRICE}</arg>
+<status status="PASS" start="2026-03-06T11:24:36.879493" elapsed="0.002212"/>
+</kw>
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.882853" level="INFO">${qtd_num} = 3.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.882611" elapsed="0.000274"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.883210" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.883007" elapsed="0.000233"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.883662" level="INFO">${produto} = {'sku': '100306000', 'quantity': 3.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.883357" elapsed="0.000334"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:36.883758" elapsed="0.000045"/>
+</return>
+<msg time="2026-03-06T11:24:36.883952" level="INFO">${produto2} = {'sku': '100306000', 'quantity': 3.0, 'price': 11.86}</msg>
+<var>${produto2}</var>
+<arg>${SKU}</arg>
+<arg>3</arg>
+<arg>${PRICE}</arg>
+<status status="PASS" start="2026-03-06T11:24:36.882188" elapsed="0.001790"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.884770" level="INFO">@{produtos} = [ {'sku': '100306000', 'quantity': 5.0, 'price': 11.86} | {'sku': '100306000', 'quantity': 3.0, 'price': 11.86} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto1}</arg>
+<arg>${produto2}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.884490" elapsed="0.000312"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:36.885781" level="INFO">${payload} = {'deliveryZipCode': '85340000', 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${payload}</var>
+<arg>deliveryZipCode=${ZIPCODE}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.885405" elapsed="0.000425"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>products=${produtos}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.886419" elapsed="0.000373"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:37.484902" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '213'} 
+ body=b'{"deliveryZipCode": "85340000", "suryaClubCode": "20", "salesPersonProtheusId": "A00018", "products": [{"sku": "100306000", "quantity": 5.0, "price": 11.86}, {"sku": "100306000", "quantity": 3.0, "price": 11.86}]}' 
+ </msg>
+<msg time="2026-03-06T11:24:37.484989" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '894', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"data":{"distributionCenterDocument":"00814559000155","dispatchTime":5,"EXPRESS":{"carrier":{"name":"São Gabriel Transportes Eireli-ME","description":"São Gabriel Translog 2024","document":"15.488.297/0012-06","id":"261"},"value":13.2,"days":2},"OTHERS":[{"carrier":{"name":"Expresso São Miguel ","description":"EXPRESSO SAO MIGUEL 2026","document":"00.428.307/0008-64","id":"296"},"value":46.1,"days":5},{"carrier":{"name":"Azul Linhas Aereas ","description":"Azul 09/09/2025","document":"09.296.295/0004-02","id":"288"},"value":72.37,"days":4}],"products":{"availableProducts":[{"sku":"100306000","name":"ESCOVA MACIA MULTI PROTECAO SENSODYNE","requestedQuantity":5,"availableStock":6324,"hasStock":true,"price":11.86},{"sku":"100306000","name":"ESCOVA MACIA MULTI PROTECAO SENSODYNE","requestedQuantity":3,"availableStock":6324,"hasStock":true,"price":11.86}],"unavailableProducts":[]}}} 
+ </msg>
+<msg time="2026-03-06T11:24:37.485057" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:37.485380" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:36.888178" elapsed="0.597231"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.486146" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.485653" elapsed="0.000543"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:36.878595" elapsed="0.607943"/>
+</test>
+<test id="s1-s2-t2" name="Validar Estrutura Carrier" line="22">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.488294" level="INFO">${qtd_num} = 5.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.488163" elapsed="0.000150"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.488479" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.488380" elapsed="0.000115"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.488770" level="INFO">${produto} = {'sku': '100306000', 'quantity': 5.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.488576" elapsed="0.000211"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:37.488825" elapsed="0.000028"/>
+</return>
+<msg time="2026-03-06T11:24:37.488936" level="INFO">${produto} = {'sku': '100306000', 'quantity': 5.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>${SKU}</arg>
+<arg>5</arg>
+<arg>${PRICE}</arg>
+<status status="PASS" start="2026-03-06T11:24:37.487909" elapsed="0.001058"/>
+</kw>
+<kw name="Solicitar Cotacao" owner="shipping_keywords">
+<kw name="Montar Body Cotacao" owner="shipping_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.490172" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 5.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>deliveryZipCode=${zipcode}</arg>
+<arg>products=${produtos}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.489929" elapsed="0.000265"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2026-03-06T11:24:37.490238" elapsed="0.000028"/>
+</return>
+<msg time="2026-03-06T11:24:37.490351" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 5.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>${ZIPCODE}</arg>
+<arg>@{produtos}</arg>
+<status status="PASS" start="2026-03-06T11:24:37.489737" elapsed="0.000631"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:37.722585" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '158'} 
+ body=b'{"deliveryZipCode": "85340000", "products": [{"sku": "100306000", "quantity": 5.0, "price": 11.86}], "suryaClubCode": "20", "salesPersonProtheusId": "A00018"}' 
+ </msg>
+<msg time="2026-03-06T11:24:37.722662" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '755', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"data":{"distributionCenterDocument":"00814559000155","dispatchTime":5,"EXPRESS":{"carrier":{"name":"São Gabriel Transportes Eireli-ME","description":"São Gabriel Translog 2024","document":"15.488.297/0012-06","id":"261"},"value":12.94,"days":2},"OTHERS":[{"carrier":{"name":"Expresso São Miguel ","description":"EXPRESSO SAO MIGUEL 2026","document":"00.428.307/0008-64","id":"296"},"value":45.99,"days":5},{"carrier":{"name":"Azul Linhas Aereas ","description":"Azul 09/09/2025","document":"09.296.295/0004-02","id":"288"},"value":72.13,"days":4}],"products":{"availableProducts":[{"sku":"100306000","name":"ESCOVA MACIA MULTI PROTECAO SENSODYNE","requestedQuantity":5,"availableStock":6324,"hasStock":true,"price":11.86}],"unavailableProducts":[]}}} 
+ </msg>
+<msg time="2026-03-06T11:24:37.722724" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:37.723070" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.490438" elapsed="0.232668"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-03-06T11:24:37.723179" elapsed="0.000037"/>
+</return>
+<msg time="2026-03-06T11:24:37.723329" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${produto}</arg>
+<status status="PASS" start="2026-03-06T11:24:37.489378" elapsed="0.233970"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.723982" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.723575" elapsed="0.000456"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.724680" level="INFO">${json} = {'data': {'distributionCenterDocument': '00814559000155', 'dispatchTime': 5, 'EXPRESS': {'carrier': {'name': 'São Gabriel Transportes Eireli-ME', 'description': 'São Gabriel Translog 2024', 'document'...</msg>
+<var>${json}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.724219" elapsed="0.000488"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-03-06T11:24:37.725133" level="INFO">${data} = {'distributionCenterDocument': '00814559000155', 'dispatchTime': 5, 'EXPRESS': {'carrier': {'name': 'São Gabriel Transportes Eireli-ME', 'description': 'São Gabriel Translog 2024', 'document': '15.488...</msg>
+<var>${data}</var>
+<arg>${json}</arg>
+<arg>data</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.724949" elapsed="0.000207"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-03-06T11:24:37.725549" level="INFO">${express} = {'carrier': {'name': 'São Gabriel Transportes Eireli-ME', 'description': 'São Gabriel Translog 2024', 'document': '15.488.297/0012-06', 'id': '261'}, 'value': 12.94, 'days': 2}</msg>
+<var>${express}</var>
+<arg>${data}</arg>
+<arg>EXPRESS</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.725336" elapsed="0.000248"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${express}</arg>
+<arg>carrier</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.725741" elapsed="0.000142"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${express}</arg>
+<arg>value</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.726037" elapsed="0.000174"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${express}</arg>
+<arg>days</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.726424" elapsed="0.000162"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:37.487416" elapsed="0.239403"/>
+</test>
+<test id="s1-s2-t3" name="Cotacao De Frete Com Sucesso (Shipping)" line="33">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.728082" level="INFO">${qtd_num} = 1.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.727923" elapsed="0.000184"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.728322" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.728196" elapsed="0.000144"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.728626" level="INFO">${produto} = {'sku': '100306000', 'quantity': 1.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.728415" elapsed="0.000230"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:37.728776" elapsed="0.000035"/>
+</return>
+<msg time="2026-03-06T11:24:37.728918" level="INFO">${produto} = {'sku': '100306000', 'quantity': 1.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>${SKU}</arg>
+<arg>1</arg>
+<arg>${PRICE}</arg>
+<status status="PASS" start="2026-03-06T11:24:37.727642" elapsed="0.001295"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.729274" level="INFO">@{produtos} = [ {'sku': '100306000', 'quantity': 1.0, 'price': 11.86} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.729136" elapsed="0.000158"/>
+</kw>
+<kw name="Montar Body Cotacao" owner="shipping_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.730184" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 1.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>deliveryZipCode=${zipcode}</arg>
+<arg>products=${produtos}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.729790" elapsed="0.000434"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2026-03-06T11:24:37.730302" elapsed="0.000037"/>
+</return>
+<msg time="2026-03-06T11:24:37.730470" level="INFO">${payload} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 1.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${payload}</var>
+<arg>${ZIPCODE}</arg>
+<arg>@{produtos}</arg>
+<status status="PASS" start="2026-03-06T11:24:37.729507" elapsed="0.000987"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:37.967264" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '158'} 
+ body=b'{"deliveryZipCode": "85340000", "products": [{"sku": "100306000", "quantity": 1.0, "price": 11.86}], "suryaClubCode": "20", "salesPersonProtheusId": "A00018"}' 
+ </msg>
+<msg time="2026-03-06T11:24:37.967332" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '754', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"data":{"distributionCenterDocument":"00814559000155","dispatchTime":5,"EXPRESS":{"carrier":{"name":"São Gabriel Transportes Eireli-ME","description":"São Gabriel Translog 2024","document":"15.488.297/0012-06","id":"261"},"value":12.58,"days":2},"OTHERS":[{"carrier":{"name":"Expresso São Miguel ","description":"EXPRESSO SAO MIGUEL 2026","document":"00.428.307/0008-64","id":"296"},"value":45.84,"days":5},{"carrier":{"name":"Azul Linhas Aereas ","description":"Azul 09/09/2025","document":"09.296.295/0004-02","id":"288"},"value":66.9,"days":4}],"products":{"availableProducts":[{"sku":"100306000","name":"ESCOVA MACIA MULTI PROTECAO SENSODYNE","requestedQuantity":1,"availableStock":6324,"hasStock":true,"price":11.86}],"unavailableProducts":[]}}} 
+ </msg>
+<msg time="2026-03-06T11:24:37.967384" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:37.967775" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.730781" elapsed="0.237023"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.968397" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.968011" elapsed="0.000426"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:37.727185" elapsed="0.241565"/>
+</test>
+<test id="s1-s2-t4" name="Cotacao Sem Estoque (Shipping)" line="40">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.970465" level="INFO">${qtd_num} = 999999.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.970332" elapsed="0.000155"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.970662" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.970556" elapsed="0.000123"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.970957" level="INFO">${produto} = {'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.970752" elapsed="0.000221"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:37.971009" elapsed="0.000027"/>
+</return>
+<msg time="2026-03-06T11:24:37.971114" level="INFO">${produto} = {'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>${SKU_SEM_ESTOQUE}</arg>
+<arg>${QTD_SEM_ESTOQUE}</arg>
+<arg>${PRICE_SEM_ESTOQUE}</arg>
+<status status="PASS" start="2026-03-06T11:24:37.970050" elapsed="0.001078"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.971614" level="INFO">@{produtos} = [ {'sku': '100306000', 'quantity': 999999.0, 'price': 11.86} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.971477" elapsed="0.000156"/>
+</kw>
+<kw name="Montar Body Cotacao" owner="shipping_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:37.972450" level="INFO">${body} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${body}</var>
+<arg>deliveryZipCode=${zipcode}</arg>
+<arg>products=${produtos}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.972231" elapsed="0.000238"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2026-03-06T11:24:37.972507" elapsed="0.000023"/>
+</return>
+<msg time="2026-03-06T11:24:37.972608" level="INFO">${payload} = {'deliveryZipCode': '85340000', 'products': [{'sku': '100306000', 'quantity': 999999.0, 'price': 11.86}], 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${payload}</var>
+<arg>${ZIPCODE}</arg>
+<arg>@{produtos}</arg>
+<status status="PASS" start="2026-03-06T11:24:37.971985" elapsed="0.000639"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:38.212133" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '163'} 
+ body=b'{"deliveryZipCode": "85340000", "products": [{"sku": "100306000", "quantity": 999999.0, "price": 11.86}], "suryaClubCode": "20", "salesPersonProtheusId": "A00018"}' 
+ </msg>
+<msg time="2026-03-06T11:24:38.212205" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '661', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"data":{"distributionCenterDocument":"00814559000155","dispatchTime":5,"STANDARD":{"carrier":{"name":"Expresso São Miguel ","description":"EXPRESSO SAO MIGUEL 2026","document":"00.428.307/0008-64","id":"296"},"value":0,"days":5},"EXPRESS":{"carrier":{"name":"São Gabriel Transportes Eireli-ME","description":"São Gabriel Translog 2024","document":"15.488.297/0012-06","id":"261"},"value":188.39,"days":2},"OTHERS":[],"products":{"availableProducts":[],"unavailableProducts":[{"sku":"100306000","name":"ESCOVA MACIA MULTI PROTECAO SENSODYNE","requestedQuantity":999999,"availableStock":6324,"hasStock":false,"price":11.86}]},"warning":"NO_SUFFICIENT_STOCK"}} 
+ </msg>
+<msg time="2026-03-06T11:24:38.212264" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:38.212673" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:37.973099" elapsed="0.239613"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.213785" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.213115" elapsed="0.000752"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:37.969568" elapsed="0.244725"/>
+</test>
+<test id="s1-s2-t5" name="Cotacao CEP Invalido (Shipping)" line="47">
+<kw name="Criar Produto" owner="shipping_keywords">
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.216028" level="INFO">${qtd_num} = 10.0</msg>
+<var>${qtd_num}</var>
+<arg>${qtd}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.215903" elapsed="0.000145"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.216209" level="INFO">${price_num} = 11.86</msg>
+<var>${price_num}</var>
+<arg>${price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.216113" elapsed="0.000111"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.216466" level="INFO">${produto} = {'sku': '100306000', 'quantity': 10.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>sku=${sku}</arg>
+<arg>quantity=${qtd_num}</arg>
+<arg>price=${price_num}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.216289" elapsed="0.000192"/>
+</kw>
+<return>
+<value>${produto}</value>
+<status status="PASS" start="2026-03-06T11:24:38.216516" elapsed="0.000026"/>
+</return>
+<msg time="2026-03-06T11:24:38.216618" level="INFO">${produto} = {'sku': '100306000', 'quantity': 10.0, 'price': 11.86}</msg>
+<var>${produto}</var>
+<arg>${SKU}</arg>
+<arg>10</arg>
+<arg>${PRICE}</arg>
+<status status="PASS" start="2026-03-06T11:24:38.215663" elapsed="0.000970"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.217076" level="INFO">@{produtos} = [ {'sku': '100306000', 'quantity': 10.0, 'price': 11.86} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.216941" elapsed="0.000154"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.217574" level="INFO">${payload} = {'deliveryZipCode': '00000000', 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018'}</msg>
+<var>${payload}</var>
+<arg>deliveryZipCode=00000000</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.217393" elapsed="0.000200"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>products=${produtos}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.217882" elapsed="0.000127"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:38.434236" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '159'} 
+ body=b'{"deliveryZipCode": "00000000", "suryaClubCode": "20", "salesPersonProtheusId": "A00018", "products": [{"sku": "100306000", "quantity": 10.0, "price": 11.86}]}' 
+ </msg>
+<msg time="2026-03-06T11:24:38.434313" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=502, reason=Bad Gateway 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:38 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '37', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"code":"INVALID_DATAFRETE_RESPONSE"} 
+ </msg>
+<msg time="2026-03-06T11:24:38.434369" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:38.434760" level="INFO">${response} = &lt;Response [502]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.218311" elapsed="0.216489"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.435445" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>502</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.435052" elapsed="0.000434"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:38.215201" elapsed="0.220714"/>
+</test>
+<test id="s1-s2-t6" name="Cotacao Sem Produtos (Shipping)" line="58">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.437740" level="INFO">${payload} = {'deliveryZipCode': '85340000', 'suryaClubCode': '20', 'salesPersonProtheusId': 'A00018', 'products': ''}</msg>
+<var>${payload}</var>
+<arg>deliveryZipCode=${ZIPCODE}</arg>
+<arg>suryaClubCode=${SURYA_CLUB_CODE}</arg>
+<arg>salesPersonProtheusId=${SALES_ID}</arg>
+<arg>products=${EMPTY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.437252" elapsed="0.000511"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-06T11:24:38.593670" level="INFO">POST Request : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ path_url=/shipping-quote 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'x-api-key': 'mds_YPxIB9J2a18SCxZ1jR-hWlO8LGmOluJPsVGWsgIea1I', 'Content-Length': '105'} 
+ body=b'{"deliveryZipCode": "85340000", "suryaClubCode": "20", "salesPersonProtheusId": "A00018", "products": ""}' 
+ </msg>
+<msg time="2026-03-06T11:24:38.593735" level="INFO">POST Response : url=https://api-hml-malha.suryadental.com.br/shipping-quote 
+ status=422, reason=Unprocessable Entity 
+ headers={'Date': 'Fri, 06 Mar 2026 14:24:38 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '177', 'Connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true'} 
+ body={"code":"VALIDATION","errors":[{"code":"invalid_type","expected":"array","received":"string","path":["products"],"message":"Expected array, received string"}],"location":"body"} 
+ </msg>
+<msg time="2026-03-06T11:24:38.593783" level="INFO">C:\Users\raquel.goncalves\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-hml-malha.suryadental.com.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-03-06T11:24:38.594248" level="INFO">${response} = &lt;Response [422]&gt;</msg>
+<var>${response}</var>
+<arg>malha</arg>
+<arg>/shipping-quote</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.438082" elapsed="0.156201"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-06T11:24:38.595031" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>422</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-06T11:24:38.594626" elapsed="0.000449"/>
+</kw>
+<status status="PASS" start="2026-03-06T11:24:38.436791" elapsed="0.158570"/>
+</test>
+<status status="PASS" start="2026-03-06T11:24:36.867469" elapsed="1.729054"/>
+</suite>
+<status status="PASS" start="2026-03-06T11:24:35.366632" elapsed="3.231578"/>
+</suite>
+<statistics>
+<total>
+<stat pass="10" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Api" id="s1" pass="10" fail="0" skip="0">Api</stat>
+<stat name="Cotacao Api Tests" id="s1-s1" pass="4" fail="0" skip="0">Api.Cotacao Api Tests</stat>
+<stat name="Test Shipping Quote" id="s1-s2" pass="6" fail="0" skip="0">Api.Test Shipping Quote</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
