@@ -7,44 +7,94 @@ Resource          ../../configs/config_api_malha.robot
 Suite Setup       Criar Sessao API
 
 *** Test Cases ***
+
 Recalcular Cotacao Com Sucesso
-    ${produto}=    Criar Produto    PROD-001    2    75.5
+    ${produto}=    Criar Produto    ${SKU}    2    ${PRICE}
     @{produtos}=    Create List    ${produto}
-    ${body}=    Montar Body Cotacao Recalcular    01310100    @{produtos}    10    PROT-SELLER-123    12345678000195
-    ${response}=    POST On Session    malha    /cota%C3%A7%C3%A3o-de-envio/recalcular    json=${body}    expected_status=any
+
+    ${body}=    Montar Body Cotacao Recalcular
+    ...    ${ZIPCODE}
+    ...    @{produtos}
+
+    ${response}=    Recalcular Cotacao    ${body}
+
+    Log    ${response.text}
+    Should Be Equal As Integers    ${response.status_code}    201
 
 Recalcular Cotacao Sem Produtos
-    ${body}=       Montar Body Cotacao Recalcular    ${ZIPCODE}    ${EMPTY}    ${SURYA_CLUB_CODE}    ${SALES_ID}    ${DISTRIBUTION_DOC}
-    ${response}=    POST On Session    malha    /cota%C3%A7%C3%A3o-de-envio/recalcular    json=${body}    expected_status=any    
+    @{produtos}=    Create List
+
+    ${body}=    Montar Body Cotacao Recalcular
+    ...    ${ZIPCODE}
+    ...    @{produtos}
+
+    ${response}=    Recalcular Cotacao    ${body}
+
+    Log    ${response.text}
+    Should Be Equal As Integers    ${response.status_code}    422
 
 Recalcular Cotacao CEP Invalido
     ${produto}=    Criar Produto    ${SKU}    1    ${PRICE}
     @{produtos}=   Create List    ${produto}
-    ${body}=       Montar Body Cotacao Recalcular    00000000    @{produtos}    ${SURYA_CLUB_CODE}    ${SALES_ID}    ${DISTRIBUTION_DOC}
-    ${response}=    POST On Session    malha    /cota%C3%A7%C3%A3o-de-envio/recalcular    json=${body}    expected_status=any
+
+    ${body}=    Montar Body Cotacao Recalcular
+    ...    00000000
+    ...    @{produtos}
+
+    ${response}=    Recalcular Cotacao    ${body}
+
+    Log    ${response.text}
     Should Be Equal As Integers    ${response.status_code}    422
+
 
 Recalcular Cotacao Sem Permissao
     ${produto}=    Criar Produto    ${SKU}    1    ${PRICE}
     @{produtos}=   Create List    ${produto}
-    ${body}=       Montar Body Cotacao Recalcular    ${ZIPCODE}    @{produtos}
-    ${response}=    POST On Session    malha    /cota%C3%A7%C3%A3o-de-envio/recalcular    json=${body}    expected_status=any
-    # Aqui você pode validar se o código de erro da API é "RECALC_SHIPPING_NOT_ALLOWED"
-    ${json}=       Set Variable    ${response.json()}
-    Dictionary Should Contain Key    ${response.json()}    data
-    Should Be Equal    ${json['code']}    RECALC_SHIPPING_NOT_ALLOWED
+
+    ${body}=    Montar Body Cotacao Recalcular
+    ...    ${ZIPCODE}
+    ...    @{produtos}
+    ...    999
+    ...    TEST
+    ...    ${DISTRIBUTION_DOC}
+
+    ${response}=    Recalcular Cotacao    ${body}
+
+    ${json}=    Evaluate    ${response.json()}
+
+    Log    ${json}
+
+    Dictionary Should Contain Key    ${json}    error
+    Should Be Equal    ${json['error']}    RECALC_SHIPPING_NOT_ALLOWED
 
 Recalcular Cotacao DistribCenter Invalido
     ${produto}=    Criar Produto    ${SKU}    1    ${PRICE}
     @{produtos}=   Create List    ${produto}
-    ${body}=       Montar Body Cotacao Recalcular    ${ZIPCODE}    @{produtos}    ${SURYA_CLUB_CODE}    ${SALES_ID}    00000000000000
-    ${response}=    POST On Session    malha    /cota%C3%A7%C3%A3o-de-envio/recalcular    json=${body}    expected_status=any
+
+    ${body}=    Montar Body Cotacao Recalcular
+    ...    ${ZIPCODE}
+    ...    @{produtos}
+    ...    ${SURYA_CLUB_CODE}
+    ...    ${SALES_ID}
+    ...    00000000000000
+
+    ${response}=    Recalcular Cotacao    ${body}
+
+    Log    ${response.text}
     Should Be Equal As Integers    ${response.status_code}    422
 
 Recalcular Cotacao Produtos Multiplo
     ${produto1}=    Criar Produto    ${SKU}    2    ${PRICE}
-    ${produto2}=    Criar Produto    ${SKU2}    3    ${PRICE2}
+    ${produto2}=    Criar Produto    ${SKU}    3    ${PRICE}
+
     @{produtos}=    Create List    ${produto1}    ${produto2}
-    ${body}=       Montar Body Cotacao Recalcular    ${ZIPCODE}    @{produtos}    ${SURYA_CLUB_CODE}    ${SALES_ID}    ${DISTRIBUTION_DOC}
-    ${response}=    POST On Session    malha    /cota%C3%A7%C3%A3o-de-envio/recalcular    json=${body}    expected_status=any
+
+    ${body}=    Montar Body Cotacao Recalcular
+    ...    ${ZIPCODE}
+    ...    @{produtos}
+
+    ${response}=    Recalcular Cotacao    ${body}
+
+    Log    ${response.text}
+
     Should Be Equal As Integers    ${response.status_code}    201
