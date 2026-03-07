@@ -1,3 +1,13 @@
-notepad .gitignore
-# ou, se usar VSCode:
-code .gitignore
+# Robot Framework
+log.html
+report.html
+output.xml
+results/
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
