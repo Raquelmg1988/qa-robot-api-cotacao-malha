@@ -5,7 +5,7 @@ Resource          ../../configs/config_api_malha.robot
 Suite Setup       Criar Sessao API
 
 *** Test Cases ***
-*** Test Cases ***
+
 Cotacao De Frete Com Sucesso
     ${produto}=    Criar Produto    ${SKU}    1    ${PRICE}
     @{produtos}=   Create List    ${produto}
