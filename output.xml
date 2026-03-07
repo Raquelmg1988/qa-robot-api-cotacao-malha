@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2026-03-07T11:34:43.657943" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Automação\tests-automation\malha-logistica-dental\tests">
+<suite id="s1-s1" name="Api" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api">
+<suite id="s1-s1-s1" name="Cotacao Api Tests" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api\cotacao_api_tests.robot">
+<kw name="Criar Sessao API" type="SETUP">
+<msg time="2026-03-07T11:34:43.876865" level="FAIL">No keyword with name 'Criar Sessao API' found.</msg>
+<status status="FAIL" start="2026-03-07T11:34:43.876754" elapsed="0.000194">No keyword with name 'Criar Sessao API' found.</status>
+</kw>
+<test id="s1-s1-s1-t1" name="Cotacao De Frete Com Sucesso" line="9">
+<status status="FAIL" start="2026-03-07T11:34:43.877988" elapsed="0.000380">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s1-t2" name="Cotacao Sem Estoque" line="18">
+<status status="FAIL" start="2026-03-07T11:34:43.878752" elapsed="0.000225">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s1-t3" name="Cotacao CEP Invalido" line="25">
+<status status="FAIL" start="2026-03-07T11:34:43.879472" elapsed="0.000255">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s1-t4" name="Cotacao Sem Produtos" line="36">
+<status status="FAIL" start="2026-03-07T11:34:43.880906" elapsed="0.000495">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<status status="FAIL" start="2026-03-07T11:34:43.709249" elapsed="0.173247">Suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</suite>
+<suite id="s1-s1-s2" name="Test Recalcular Cotacao" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_recalcular_cotacao.robot">
+<kw name="Criar Sessao API" type="SETUP">
+<msg time="2026-03-07T11:34:43.902018" level="FAIL">No keyword with name 'Criar Sessao API' found.</msg>
+<status status="FAIL" start="2026-03-07T11:34:43.901968" elapsed="0.000100">No keyword with name 'Criar Sessao API' found.</status>
+</kw>
+<test id="s1-s1-s2-t1" name="Recalcular Cotacao Com Sucesso" line="10">
+<status status="FAIL" start="2026-03-07T11:34:43.902134" elapsed="0.000423">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s2-t2" name="Recalcular Cotacao Sem Produtos" line="16">
+<status status="FAIL" start="2026-03-07T11:34:43.903432" elapsed="0.000462">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s2-t3" name="Recalcular Cotacao CEP Invalido" line="20">
+<status status="FAIL" start="2026-03-07T11:34:43.904726" elapsed="0.000825">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s2-t4" name="Recalcular Cotacao Sem Permissao" line="27">
+<status status="FAIL" start="2026-03-07T11:34:43.906314" elapsed="0.000563">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s2-t5" name="Recalcular Cotacao DistribCenter Invalido" line="37">
+<status status="FAIL" start="2026-03-07T11:34:43.908049" elapsed="0.000606">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s2-t6" name="Recalcular Cotacao Produtos Multiplo" line="44">
+<status status="FAIL" start="2026-03-07T11:34:43.909380" elapsed="0.000612">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<status status="FAIL" start="2026-03-07T11:34:43.883655" elapsed="0.027154">Suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</suite>
+<suite id="s1-s1-s3" name="Test Recalcular Quote" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_recalcular_quote.robot">
+<kw name="Criar Sessao API" type="SETUP">
+<msg time="2026-03-07T11:34:43.918361" level="FAIL">No keyword with name 'Criar Sessao API' found.</msg>
+<status status="FAIL" start="2026-03-07T11:34:43.918287" elapsed="0.000141">No keyword with name 'Criar Sessao API' found.</status>
+</kw>
+<test id="s1-s1-s3-t1" name="Recalculo De Frete Com Sucesso" line="22">
+<status status="FAIL" start="2026-03-07T11:34:43.918495" elapsed="0.000457">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t2" name="Recalculo Sem Produtos" line="29">
+<status status="FAIL" start="2026-03-07T11:34:43.919803" elapsed="0.000512">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t3" name="Recalculo CEP Invalido" line="39">
+<status status="FAIL" start="2026-03-07T11:34:43.921732" elapsed="0.001241">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t4" name="Recalculo Produto Quantidade Zero" line="46">
+<status status="FAIL" start="2026-03-07T11:34:43.924113" elapsed="0.000546">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t5" name="Recalculo Produto Preco Negativo" line="53">
+<status status="FAIL" start="2026-03-07T11:34:43.925672" elapsed="0.000725">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t6" name="Recalculo Distribuicao Invalida" line="60">
+<status status="FAIL" start="2026-03-07T11:34:43.927364" elapsed="0.000514">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t7" name="Recalculo Produto Inexistente" line="67">
+<status status="FAIL" start="2026-03-07T11:34:43.928695" elapsed="0.000359">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t8" name="Recalculo Todos Tipos de Carrier" line="74">
+<status status="FAIL" start="2026-03-07T11:34:43.929967" elapsed="0.000317">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t9" name="Recalculo Sem SuryaClubCode" line="95">
+<status status="FAIL" start="2026-03-07T11:34:43.931054" elapsed="0.000374">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s3-t10" name="Recalculo Sem SalesPersonProtheusId" line="102">
+<status status="FAIL" start="2026-03-07T11:34:43.932415" elapsed="0.000531">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<status status="FAIL" start="2026-03-07T11:34:43.911854" elapsed="0.021885">Suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</suite>
+<suite id="s1-s1-s4" name="Test Shipping Quote" source="C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_shipping_quote.robot">
+<kw name="Criar Sessao API" type="SETUP">
+<msg time="2026-03-07T11:34:43.942752" level="FAIL">No keyword with name 'Criar Sessao API' found.</msg>
+<status status="FAIL" start="2026-03-07T11:34:43.942692" elapsed="0.000122">No keyword with name 'Criar Sessao API' found.</status>
+</kw>
+<test id="s1-s1-s4-t1" name="Cotacao Multiplos Produtos" line="10">
+<status status="FAIL" start="2026-03-07T11:34:43.942926" elapsed="0.000572">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s4-t2" name="Validar Estrutura Carrier" line="22">
+<status status="FAIL" start="2026-03-07T11:34:43.944825" elapsed="0.000551">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s4-t3" name="Cotacao De Frete Com Sucesso (Shipping)" line="33">
+<status status="FAIL" start="2026-03-07T11:34:43.946412" elapsed="0.000360">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s4-t4" name="Cotacao Sem Estoque (Shipping)" line="40">
+<status status="FAIL" start="2026-03-07T11:34:43.947878" elapsed="0.000413">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s4-t5" name="Cotacao CEP Invalido (Shipping)" line="47">
+<status status="FAIL" start="2026-03-07T11:34:43.949252" elapsed="0.000337">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<test id="s1-s1-s4-t6" name="Cotacao Sem Produtos (Shipping)" line="58">
+<status status="FAIL" start="2026-03-07T11:34:43.950116" elapsed="0.000407">Parent suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</test>
+<status status="FAIL" start="2026-03-07T11:34:43.934563" elapsed="0.016817">Suite setup failed:
+No keyword with name 'Criar Sessao API' found.</status>
+</suite>
+<status status="FAIL" start="2026-03-07T11:34:43.707300" elapsed="0.245099"/>
+</suite>
+<status status="FAIL" start="2026-03-07T11:34:43.661502" elapsed="0.291885"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="26" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="0" fail="26" skip="0">Tests</stat>
+<stat name="Api" id="s1-s1" pass="0" fail="26" skip="0">Tests.Api</stat>
+<stat name="Cotacao Api Tests" id="s1-s1-s1" pass="0" fail="4" skip="0">Tests.Api.Cotacao Api Tests</stat>
+<stat name="Test Recalcular Cotacao" id="s1-s1-s2" pass="0" fail="6" skip="0">Tests.Api.Test Recalcular Cotacao</stat>
+<stat name="Test Recalcular Quote" id="s1-s1-s3" pass="0" fail="10" skip="0">Tests.Api.Test Recalcular Quote</stat>
+<stat name="Test Shipping Quote" id="s1-s1-s4" pass="0" fail="6" skip="0">Tests.Api.Test Shipping Quote</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-03-07T11:34:43.873516" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\cotacao_api_tests.robot' on line 3: Resource file '..\..\keywords\shipping_keywords.robot' does not exist.</msg>
+<msg time="2026-03-07T11:34:43.874357" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\cotacao_api_tests.robot' on line 4: Resource file '..\..\configs\config_api_malha.robot' does not exist.</msg>
+<msg time="2026-03-07T11:34:43.898453" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_recalcular_cotacao.robot' on line 5: Resource file '..\..\keywords\shipping_keywords.robot' does not exist.</msg>
+<msg time="2026-03-07T11:34:43.899754" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_recalcular_cotacao.robot' on line 6: Resource file '..\..\configs\config_api_malha.robot' does not exist.</msg>
+<msg time="2026-03-07T11:34:43.915040" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_recalcular_quote.robot' on line 5: Resource file '..\..\keywords\shipping_keywords.robot' does not exist.</msg>
+<msg time="2026-03-07T11:34:43.915763" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_recalcular_quote.robot' on line 6: Resource file '..\..\configs\config_api_malha.robot' does not exist.</msg>
+<msg time="2026-03-07T11:34:43.937291" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_shipping_quote.robot' on line 5: Resource file '..\..\keywords\shipping_keywords.robot' does not exist.</msg>
+<msg time="2026-03-07T11:34:43.940251" level="ERROR">Error in file 'C:\Automação\tests-automation\malha-logistica-dental\tests\api\test_shipping_quote.robot' on line 6: Resource file '..\..\configs\config_api_malha.robot' does not exist.</msg>
+</errors>
+</robot>
