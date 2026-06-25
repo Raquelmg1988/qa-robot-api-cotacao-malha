@@ -1,0 +1,20 @@
+# Robot Framework results
+results/
+log.html
+report.html
+output.xml
+
+# Python virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+.env.txt
+
+# IDE
+.vscode/
+.idea/
